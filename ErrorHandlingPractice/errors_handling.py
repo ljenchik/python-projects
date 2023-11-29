@@ -32,7 +32,6 @@ finally: # always runs
     print("Always!")
 
 
-
 while True:
     try:
         num = int(input("Enter a number: "))
