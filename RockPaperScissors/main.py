@@ -1,17 +1,12 @@
 import random
 
 options = ['rock', 'paper', 'scissors', 'lizard', 'spock']
-name = input('What is your name? ')
-print(f"Let's play {name}")
-
-player_score = 0
-computer_score = 0
 
 
-def winner(player1, player2):
+def winner(player1, player2, name):
     if player1 == player2:
         return f"It's a tie"
-    # player1 wins
+    # player wins
     elif player1 == "rock" and player2 == "scissors":
         return f'Rock crushes scissors! {name} Wins!'
     elif player1 == "rock" and player2 == "lizard":
@@ -33,7 +28,7 @@ def winner(player1, player2):
     elif player1 == "lizard" and player2 == "paper":
         return f'Lizard eats paper! {name} Wins!'
 
-    # player2 wins
+    # computer wins
     elif player2 == "rock" and player1 == "scissors":
         return f'Rock crushes scissors! Computer Wins!'
     elif player2 == "rock" and player1 == "lizard":
@@ -56,36 +51,40 @@ def winner(player1, player2):
         return f'Lizard eats paper! Computer Wins!'
 
 
-def score(s):
-    global player_score
-    global computer_score
-    if "Computer Wins!" in s:
-        computer_score = computer_score + 1
-    elif name in s:
-        player_score = player_score + 1
+def game():
+    want_to_play = 'y'
+    player_score = 0
+    computer_score = 0
 
+    name = input('What is your name? ')
+    print(f"Let's play {name}")
 
-want_to_play = 'y'
-player = (input(f'{name}, choose from rock, paper, scissors, lizard, Spock: ')).strip().lower()
-while want_to_play == 'y':
-    if player in options:
-        computer = random.choice(options)
-        print(f"Computer's choice is {computer}")
-        result = winner(player, computer)
-        print(result)
-        score(result)
-        print(f"{name}: {player_score}")
-        print(f"Computer: {computer_score}")
-        want_to_play = input("Do you want another round? y/n ").strip()[0].lower()
-        if want_to_play == 'y':
-            player = (input(f'{name}, choose from rock, paper, scissors, lizard, Spock: ')).strip().lower()
-            continue
+    player = (input(f'{name}, choose from rock, paper, scissors, lizard, Spock: ')).strip().lower()
+    while want_to_play == 'y':
+        if player in options:
+            computer = random.choice(options)
+            print(f"Computer's choice is {computer}")
+            result = winner(player, computer, name)
+            print(result)
+            if "Computer Wins!" in result:
+                computer_score += 1
+            elif name in result:
+                player_score += 1
+            print(f"{name}: {player_score}")
+            print(f"Computer: {computer_score}")
+            want_to_play = input("Do you want another round? y/n ").strip()[0].lower()
+            if want_to_play == 'y':
+                player = (input(f'{name}, choose from rock, paper, scissors, lizard, Spock: ')).strip().lower()
+                continue
+            else:
+                break
         else:
-            break
-    else:
-        player = input("Enter one of the options: rock, paper, scissors, lizard, Spock ")
-        continue
+            player = input("Enter one of the options: rock, paper, scissors, lizard, Spock ").strip().lower()
+            continue
 
-print("Final score")
-print(f"{name}: {player_score}")
-print(f"Computer: {computer_score}")
+    print("Final score")
+    print(f"{name}: {player_score}")
+    print(f"Computer: {computer_score}")
+
+
+#game()
