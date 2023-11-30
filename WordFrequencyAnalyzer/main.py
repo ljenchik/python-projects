@@ -29,7 +29,9 @@ def frequencyAnalyzer(file_name):
             for item in frequency_dictionary:
                 if frequency_dictionary[item] == frequency_dictionary[first]:
                     most_frequent_words[item] = frequency_dictionary[item]
-            print("The mos frequent words in the text are: ", ','.join(most_frequent_words.keys()))
+            if len(most_frequent_words.keys()) == 1:
+                print("The most frequent words in the text is: ", ','.join(most_frequent_words.keys()))
+            else: print("The most frequent words in the text are: ", ','.join(most_frequent_words.keys()))
             print("The number of all different words in the text is: ", len(frequency_dictionary.keys()))
             for key, value in frequency_dictionary.items():
                 print(f'{key} : {value}')
@@ -43,3 +45,4 @@ def frequencyAnalyzer(file_name):
 
 
 frequencyAnalyzer('text.txt')
+frequencyAnalyzer('text1.txt')
