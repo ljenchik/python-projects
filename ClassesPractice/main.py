@@ -49,23 +49,54 @@ class User:
         return f"{self.first_name} is logged out"
 
 
-user1 = User("sam", 'baker', "sam@gmail.com", 75)
-print(user1.first_name)
-print(user1.welcome())
-print(user1.initials())
-print(user1.likes('history'))
-print(user1.is_senior())
-user2 = User("misha", 'baker', "sam@gmail.com", 25)
-print(User.active_users)
-user2.logout()
-print(User.active_users)
+class Moderator(User):
+    total_moderators = 0
+    @classmethod
+    def display_active_moderators(cls):
+        return cls.total_moderators
+    def __init__(self, first_name, last_name, email, age, community):
+        super().__init__(first_name, last_name, email, age)
+        self.community = community
+        Moderator.total_moderators += 1
+
+    def remove_post(self):
+        return f"{self.first_name} {self.last_name} removed a post from {self.community} community"
+
+
+jasmine = Moderator("Jasmine", "Smith", "jas@gmail.com", 45, "piano")
+sam =  Moderator("Sam", "Smith", "jas@gmail.com", 14, "history")
+user1 = User("Simom", 'Baker', "sam@gmail.com", 75)
+user2 = User("Sarah", 'Good', "sarah@gmail.com", 25)
+
+print(Moderator.display_active_moderators())
 print(User.display_active_users())
-print(user2.display_active_users())
-user3 = User("sam", 'baker', "sam@gmail.com", 75)
-user4 = User("sam", 'baker', "sam@gmail.com", 75)
-print(User.display_active_users())
-user5 = User.from_string("Olena,Pelagenko,olena@gmail.com, 42")
-print(user5.first_name)
-print(user5.email)
-print(user5.age)
-print(user5)
+
+print(isinstance(jasmine, User))
+print(isinstance(jasmine, Moderator))
+
+print(isinstance(user1, User))
+print(isinstance(user1, Moderator))
+
+# user1 = User("sam", 'baker', "sam@gmail.com", 75)
+# print(user1.first_name)
+# print(user1.welcome())
+# print(user1.initials())
+# print(user1.likes('history'))
+# print(user1.is_senior())
+# user2 = User("misha", 'baker', "sam@gmail.com", 25)
+# print(User.active_users)
+# user2.logout()
+# print(User.active_users)
+# print(User.display_active_users())
+# print(user2.display_active_users())
+# user3 = User("sam", 'baker', "sam@gmail.com", 75)
+# user4 = User("sam", 'baker', "sam@gmail.com", 75)
+# print(User.display_active_users())
+# user5 = User.from_string("Olena,Pelagenko,olena@gmail.com, 42")
+# print(user5.first_name)
+# print(user5.email)
+# print(user5.age)
+# print(user5)
+# print(User.display_active_users())
+
+
