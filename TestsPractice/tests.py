@@ -16,4 +16,4 @@ class TrialTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-"You should pass a list of numbers"
+

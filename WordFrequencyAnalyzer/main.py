@@ -33,6 +33,7 @@ def frequencyAnalyzer(file_name):
             print("The number of all different words in the text is: ", len(frequency_dictionary.keys()))
             for key, value in frequency_dictionary.items():
                 print(f'{key} : {value}')
+            return ','.join(most_frequent_words.keys())
     except FileNotFoundError:
         print(f"Error: File '{file}' not found.")
     except PermissionError:
